@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test AI Chat</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .chat-container { max-width: 600px; margin: 0 auto; }
+        .chat-messages { border: 1px solid #ccc; height: 300px; overflow-y: auto; padding: 10px; margin-bottom: 10px; }
+        .message { margin-bottom: 10px; }
+        .user-message { text-align: right; }
+        .bot-message { text-align: left; }
+        .text { display: inline-block; padding: 8px 12px; border-radius: 8px; max-width: 70%; }
+        .user-message .text { background: #007bff; color: white; }
+        .bot-message .text { background: #f1f1f1; }
+        .input-container { display: flex; gap: 10px; }
+        #userInput { flex: 1; padding: 10px; }
+        #sendButton { padding: 10px 20px; }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <h2>Test AI Chat</h2>
+        <div class="chat-messages" id="chatMessages">
+            <div class="message bot-message">
+                <div class="text">Halo! Saya siap membantu Anda. Ceritakan masalah stress Anda.</div>
+            </div>
+        </div>
+        <div class="input-container">
+            <textarea id="userInput" placeholder="Ketik pesan Anda..." rows="2"></textarea>
+            <button id="sendButton">Kirim</button>
+        </div>
+    </div>
+
+    <script>
+        // Simple test without external dependencies
+        const conversationHistory = [
+            {
+                role: "system",
+                content: "You are a helpful AI assistant for student stress analysis. Respond in Indonesian with JSON format containing response, stressLevel (1-10), stressCategory, and recommendations array."
+            }
+        ];
+
+        document.getElementById('sendButton').addEventListener('click', sendMessage);
+        document.getElementById('userInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        function sendMessage() {
+            const userInput = document.getElementById('userInput');
+            const message = userInput.value.trim();
+            
+            if (!message) return;
+            
+            // Add user message
+            addMessage(message, 'user');
+            userInput.value = '';
+            
+            // Simulate AI response
+            setTimeout(() => {
+                const demoResponse = {
+                    response: "Terima kasih telah berbagi. Saya memahami Anda sedang mengalami stress. Ini normal untuk mahasiswa.",
+                    stressLevel: 6,
+                    stressCategory: "Sedang",
+                    recommendations: ["Istirahat cukup", "Olahraga ringan", "Berbicara dengan teman"]
+                };
+                
+                addMessage(demoResponse.response, 'bot');
+            }, 1000);
+        }
+
+        function addMessage(message, sender) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}-message`;
+            messageDiv.innerHTML = `<div class="text">${message}</div>`;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+    </script>
+</body>
+</html>

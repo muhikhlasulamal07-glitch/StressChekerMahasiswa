@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stress Checker Mahasiswa - AI Assistant | Muhammad Ikhlashul A'mal & Nur Ihsan Fauzi</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Desktop Navigation -->
+    <nav class="desktop-nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-brain"></i>
+                <span>Stress Checker</span>
+                <div class="brand-subtitle">by Muhammad Ikhlashul A'mal & Nur Ihsan Fauzi</div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active" data-page="home"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#mood" class="nav-link" data-page="mood"><i class="fas fa-heart"></i> Mood</a></li>
+                <li><a href="#quiz" class="nav-link" data-page="quiz"><i class="fas fa-question-circle"></i> Kuis</a></li>
+                <li><a href="#ai" class="nav-link" data-page="ai"><i class="fas fa-robot"></i> AI</a></li>
+                <li><a href="#stats" class="nav-link" data-page="stats"><i class="fas fa-chart-bar"></i> Stats</a></li>
+                <li><a href="#profile" class="nav-link" data-page="profile"><i class="fas fa-user"></i> Profile</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="page-header">
+            <h1><i class="fas fa-brain"></i> Stress Checker Mahasiswa</h1>
+            <p>Analisis tingkat stress Anda dengan bantuan AI</p>
+        </header>
+
+        <main>
+            <!-- Home Page -->
+            <div class="page-content" id="homePage">
+                <div class="welcome-section">
+                    <h2>Selamat Datang di Stress Checker</h2>
+                    <p>Platform AI untuk membantu mahasiswa mengelola stress dan kesehatan mental</p>
+                    <div class="creators-badge">
+                        <span>Dikembangkan oleh:</span>
+                        <strong>Muhammad Ikhlashul A'mal</strong> & <strong>Nur Ihsan Fauzi</strong>
+                    </div>
+                    
+                    <!-- Quick Stats -->
+                    <div class="quick-stats" id="quickStats">
+                        <div class="quick-stat-item">
+                            <i class="fas fa-chart-line"></i>
+                            <div class="stat-info">
+                                <span class="stat-number" id="homeStressAvg">-</span>
+                                <span class="stat-label">Rata-rata Stress</span>
+                            </div>
+                        </div>
+                        <div class="quick-stat-item">
+                            <i class="fas fa-comments"></i>
+                            <div class="stat-info">
+                                <span class="stat-number" id="homeChatCount">0</span>
+                                <span class="stat-label">Sesi Chat</span>
+                            </div>
+                        </div>
+                        <div class="quick-stat-item">
+                            <i class="fas fa-clipboard-check"></i>
+                            <div class="stat-info">
+                                <span class="stat-number" id="homeQuizCount">0</span>
+                                <span class="stat-label">Kuis Selesai</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feature-cards">
+                        <div class="feature-card" onclick="navigateToPage('ai')" style="cursor: pointer;">
+                            <i class="fas fa-comments"></i>
+                            <h3>Chat dengan AI</h3>
+                            <p>Ceritakan masalah Anda kepada AI assistant</p>
+                            <div class="card-action">
+                                <span>Mulai Chat <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                        </div>
+                        <div class="feature-card" onclick="navigateToPage('quiz')" style="cursor: pointer;">
+                            <i class="fas fa-question-circle"></i>
+                            <h3>Kuis Stress</h3>
+                            <p>Ikuti kuis 10 pertanyaan untuk mengukur tingkat stress</p>
+                            <div class="card-action">
+                                <span>Mulai Kuis <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                        </div>
+                        <div class="feature-card" onclick="navigateToPage('stats')" style="cursor: pointer;">
+                            <i class="fas fa-chart-line"></i>
+                            <h3>Lihat Statistik</h3>
+                            <p>Pantau progress dan trend tingkat stress Anda</p>
+                            <div class="card-action">
+                                <span>Lihat Stats <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="recent-activity" id="recentActivity">
+                        <h3><i class="fas fa-clock"></i> Aktivitas Terbaru</h3>
+                        <div class="activity-list" id="activityList">
+                            <div class="activity-item">
+                                <i class="fas fa-info-circle"></i>
+                                <span>Belum ada aktivitas. Mulai dengan chat AI atau kuis stress!</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mood Page -->
+            <div class="page-content" id="moodPage" style="display: none;">
+                <div class="mood-tracker">
+                    <h2>Mood Tracker</h2>
+                    <p>Bagaimana perasaan Anda hari ini?</p>
+                    <div class="mood-options">
+                        <div class="mood-option" data-mood="very-happy">
+                            <i class="fas fa-laugh-beam"></i>
+                            <span>Sangat Bahagia</span>
+                        </div>
+                        <div class="mood-option" data-mood="happy">
+                            <i class="fas fa-smile"></i>
+                            <span>Bahagia</span>
+                        </div>
+                        <div class="mood-option" data-mood="neutral">
+                            <i class="fas fa-meh"></i>
+                            <span>Biasa Saja</span>
+                        </div>
+                        <div class="mood-option" data-mood="sad">
+                            <i class="fas fa-frown"></i>
+                            <span>Sedih</span>
+                        </div>
+                        <div class="mood-option" data-mood="very-sad">
+                            <i class="fas fa-sad-tear"></i>
+                            <span>Sangat Sedih</span>
+                        </div>
+                    </div>
+                    <div class="mood-note">
+                        <textarea placeholder="Catatan tentang mood Anda hari ini..." id="moodNote"></textarea>
+                        <button onclick="saveMood()" class="save-mood-btn">Simpan Mood</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz Page -->
+            <div class="page-content" id="quizPage" style="display: none;">
+                <div class="quiz-container">
+                    <div class="quiz-header">
+                        <h2>Kuis Tingkat Stress</h2>
+                        <p>Jawab pertanyaan berikut untuk mengetahui tingkat stress Anda</p>
+                        <div class="quiz-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill"></div>
+                            </div>
+                            <span class="progress-text" id="progressText">1 / 10</span>
+                        </div>
+                    </div>
+
+                    <div class="quiz-content" id="quizContent">
+                        <div class="question-card" id="questionCard">
+                            <div class="question-number" id="questionNumber">Pertanyaan 1</div>
+                            <div class="question-text" id="questionText">Loading...</div>
+                            <div class="answer-options" id="answerOptions">
+                                <!-- Options will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quiz-navigation">
+                        <button class="quiz-btn secondary" id="prevBtn" onclick="previousQuestion()" disabled>
+                            <i class="fas fa-arrow-left"></i> Sebelumnya
+                        </button>
+                        <button class="quiz-btn primary" id="nextBtn" onclick="nextQuestion()" disabled>
+                            Selanjutnya <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+
+                    <div class="quiz-result" id="quizResult" style="display: none;">
+                        <div class="result-card">
+                            <div class="result-icon" id="resultIcon">
+                                <i class="fas fa-chart-pie"></i>
+                            </div>
+                            <h3>Hasil Kuis Anda</h3>
+                            <div class="result-score">
+                                <div class="score-circle" id="scoreCircle">
+                                    <span class="score-number" id="scoreNumber">0</span>
+                                    <span class="score-label">/ 100</span>
+                                </div>
+                            </div>
+                            <div class="result-category" id="resultCategory">Tingkat Stress: -</div>
+                            <div class="result-description" id="resultDescription">
+                                Deskripsi hasil akan muncul di sini...
+                            </div>
+                            <div class="result-recommendations" id="resultRecommendations">
+                                <h4><i class="fas fa-lightbulb"></i> Rekomendasi:</h4>
+                                <ul id="recommendationsList"></ul>
+                            </div>
+                            <div class="result-actions">
+                                <button class="quiz-btn primary" onclick="restartQuiz()">
+                                    <i class="fas fa-redo"></i> Ulangi Kuis
+                                </button>
+                                <button class="quiz-btn secondary" onclick="shareResult()">
+                                    <i class="fas fa-share"></i> Bagikan Hasil
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Chat Page -->
+            <div class="page-content" id="aiPage" style="display: none;">
+                <div class="chat-container">
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message bot-message">
+                            <div class="message-content">
+                                <i class="fas fa-robot"></i>
+                                <div class="text">
+                                    Halo! Aku di sini buat dengerin cerita kamu dan bantu kamu ngatasi stress yang lagi dialamin. 
+                                    Nggak usah formal-formal, anggap aja aku teman yang siap dengerin keluh kesah kamu sebagai mahasiswa. 
+                                    Ceritain aja apa yang lagi bikin kamu pusing, capek, atau stress belakangan ini. Aku siap dengerin! 😊
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-container">
+                        <div class="quick-prompts" id="quickPrompts">
+                            <div class="prompt-suggestions">
+                                <span class="prompt-label">💡 Contoh yang bisa kamu ceritain:</span>
+                                <div class="prompt-buttons">
+                                    <button class="prompt-btn" onclick="usePrompt('Aku lagi stress banget sama tugas akhir, deadline udah deket tapi masih bingung mau ngapain')">📚 Tugas Akhir</button>
+                                    <button class="prompt-btn" onclick="usePrompt('Akhir-akhir ini aku susah tidur, pikiran terus kemana-mana mikirin kuliah dan masa depan')">😴 Susah Tidur</button>
+                                    <button class="prompt-btn" onclick="usePrompt('Aku merasa overwhelmed sama semua tugas kuliah, rasanya nggak sanggup ngerjain semuanya')">😵 Overwhelmed</button>
+                                    <button class="prompt-btn" onclick="usePrompt('Orangtua aku expect nilai bagus terus, tapi aku merasa kemampuan aku terbatas')">👨‍👩‍👧‍👦 Tekanan Keluarga</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-wrapper">
+                            <textarea 
+                                id="userInput" 
+                                placeholder="Ceritain aja apa yang lagi bikin kamu stress... misalnya tugas yang numpuk, masalah sama teman, atau apapun yang lagi kamu rasain 💭"
+                                rows="3"
+                            ></textarea>
+                            <button id="sendButton" onclick="sendMessage()">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stress-level-indicator" id="stressIndicator" style="display: none;">
+                    <h3>Tingkat Stress Anda:</h3>
+                    <div class="stress-meter">
+                        <div class="stress-bar" id="stressBar"></div>
+                    </div>
+                    <div class="stress-label" id="stressLabel"></div>
+                </div>
+
+                <div class="recommendations" id="recommendations" style="display: none;">
+                    <h3><i class="fas fa-lightbulb"></i> Rekomendasi untuk Anda:</h3>
+                    <div class="recommendation-list" id="recommendationList"></div>
+                </div>
+
+                <div class="problem-analysis" id="problemAnalysis" style="display: none;">
+                    <h3><i class="fas fa-search"></i> Analisis Masalah</h3>
+                    <div class="analysis-content">
+                        <div class="problem-breakdown" id="problemBreakdown"></div>
+                        <div class="root-cause" id="rootCause"></div>
+                    </div>
+                </div>
+
+                <div class="action-plan" id="actionPlan" style="display: none;">
+                    <h3><i class="fas fa-tasks"></i> Rencana Tindakan</h3>
+                    <div class="plan-timeline">
+                        <div class="plan-section immediate">
+                            <h4><i class="fas fa-bolt"></i> Langkah Segera (Hari ini)</h4>
+                            <ul id="immediateActions"></ul>
+                        </div>
+                        <div class="plan-section short-term">
+                            <h4><i class="fas fa-calendar-week"></i> Jangka Pendek (1-2 Minggu)</h4>
+                            <ul id="shortTermActions"></ul>
+                        </div>
+                        <div class="plan-section long-term">
+                            <h4><i class="fas fa-calendar-alt"></i> Jangka Panjang (1+ Bulan)</h4>
+                            <ul id="longTermActions"></ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="priority-matrix" id="priorityMatrix" style="display: none;">
+                    <h3><i class="fas fa-sort-amount-down"></i> Matriks Prioritas</h3>
+                    <div class="matrix-container">
+                        <div class="matrix-header">
+                            <span>Tugas/Masalah</span>
+                            <span>Prioritas</span>
+                            <span>Deadline</span>
+                            <span>Tingkat Kesulitan</span>
+                        </div>
+                        <div class="matrix-body" id="matrixBody"></div>
+                    </div>
+                </div>
+
+                <div class="resources-help" id="resourcesHelp" style="display: none;">
+                    <h3><i class="fas fa-hands-helping"></i> Sumber Bantuan</h3>
+                    <div class="resources-list" id="resourcesList"></div>
+                </div>
+            </div>
+
+            <!-- Stats Page -->
+            <div class="page-content" id="statsPage" style="display: none;">
+                <div class="stats-container">
+                    <h2>Statistik Stress Anda</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <i class="fas fa-calendar-week"></i>
+                            <h3>Minggu Ini</h3>
+                            <div class="stat-value" id="weeklyAvg">-</div>
+                            <p>Rata-rata stress</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-calendar-alt"></i>
+                            <h3>Bulan Ini</h3>
+                            <div class="stat-value" id="monthlyAvg">-</div>
+                            <p>Rata-rata stress</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-chart-line"></i>
+                            <h3>Trend</h3>
+                            <div class="stat-value" id="trendValue">-</div>
+                            <p>Perubahan stress</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-comments"></i>
+                            <h3>Sesi Chat</h3>
+                            <div class="stat-value" id="chatSessions">0</div>
+                            <p>Total percakapan</p>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <h3>Grafik Tingkat Stress</h3>
+                        <div class="chart-placeholder">
+                            <i class="fas fa-chart-area"></i>
+                            <p>Grafik akan muncul setelah Anda melakukan beberapa sesi</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Page -->
+            <div class="page-content" id="profilePage" style="display: none;">
+                <div class="profile-container">
+                    <div class="profile-header">
+                        <div class="profile-avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <h2>Profil Mahasiswa</h2>
+                    </div>
+                    <div class="profile-form">
+                        <div class="form-group">
+                            <label>Nama Lengkap</label>
+                            <input type="text" id="fullName" placeholder="Masukkan nama lengkap">
+                        </div>
+                        <div class="form-group">
+                            <label>Universitas</label>
+                            <input type="text" id="university" placeholder="Nama universitas">
+                        </div>
+                        <div class="form-group">
+                            <label>Jurusan</label>
+                            <input type="text" id="major" placeholder="Program studi">
+                        </div>
+                        <div class="form-group">
+                            <label>Semester</label>
+                            <select id="semester">
+                                <option value="">Pilih semester</option>
+                                <option value="1">Semester 1</option>
+                                <option value="2">Semester 2</option>
+                                <option value="3">Semester 3</option>
+                                <option value="4">Semester 4</option>
+                                <option value="5">Semester 5</option>
+                                <option value="6">Semester 6</option>
+                                <option value="7">Semester 7</option>
+                                <option value="8">Semester 8</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="email" placeholder="email@example.com">
+                        </div>
+                        <button onclick="saveProfile()" class="save-profile-btn">Simpan Profil</button>
+                        
+                        <div class="about-creators">
+                            <h4><i class="fas fa-users"></i> Tentang Pembuat</h4>
+                            <div class="creator-info">
+                                <div class="creator-card">
+                                    <div class="creator-avatar">
+                                        <i class="fas fa-user-graduate"></i>
+                                    </div>
+                                    <div class="creator-details">
+                                        <h5>Muhammad Ikhlashul A'mal</h5>
+                                        <p>Developer & UI/UX Designer</p>
+                                    </div>
+                                </div>
+                                <div class="creator-card">
+                                    <div class="creator-avatar">
+                                        <i class="fas fa-user-graduate"></i>
+                                    </div>
+                                    <div class="creator-details">
+                                        <h5>Nur Ihsan Fauzi</h5>
+                                        <p>Developer & System Analyst</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="project-info">
+                                <i class="fas fa-info-circle"></i>
+                                Aplikasi ini dibuat sebagai solusi untuk membantu mahasiswa mengelola stress dan kesehatan mental dengan bantuan teknologi AI.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Dibuat dengan ❤️ untuk kesehatan mental mahasiswa</p>
+            <p class="creators">Oleh: <strong>Muhammad Ikhlashul A'mal</strong> & <strong>Nur Ihsan Fauzi</strong></p>
+        </footer>
+    </div>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-nav">
+        <a href="#home" class="mobile-nav-item active" data-page="home">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="#mood" class="mobile-nav-item" data-page="mood">
+            <i class="fas fa-heart"></i>
+            <span>Mood</span>
+        </a>
+        <a href="#quiz" class="mobile-nav-item" data-page="quiz">
+            <i class="fas fa-question-circle"></i>
+            <span>Kuis</span>
+        </a>
+        <a href="#ai" class="mobile-nav-item" data-page="ai">
+            <i class="fas fa-robot"></i>
+            <span>AI</span>
+        </a>
+        <a href="#stats" class="mobile-nav-item" data-page="stats">
+            <i class="fas fa-chart-bar"></i>
+            <span>Stats</span>
+        </a>
+        <a href="#profile" class="mobile-nav-item" data-page="profile">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <div class="loading" id="loading" style="display: none;">
+        <div class="spinner"></div>
+        <p>AI sedang menganalisis...</p>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
